@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, HttpCode, Inject, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { IsLogedInGuard } from 'src/guards/is-loged-in.guard';
-import { IAidServiceRequest } from './aid.service';
 import { CreateAidDto } from './dto/create-aid.dto';
 import { UpdateAidDto } from './dto/update-aid.dto';
+import { IAidServiceRequest } from './interfaces/aid.service.request.interface';
 
 @Controller('aid')
 export class AidController {

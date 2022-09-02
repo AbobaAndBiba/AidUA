@@ -4,8 +4,13 @@ import { AidUAService } from 'src/db/aid-ua.prisma.service';
 import { CRUD } from "../interfaces/crud.interface"
 import { v4 } from "uuid";
 
+export interface IAdminService extends CRUD {
+    getOneByLogin(login: string): Promise<Admin | null>,
+    generateId(): Promise<string>
+}
+
 @Injectable()
-export class AdminService implements CRUD {
+export class AdminService implements IAdminService {
     constructor(private aidUAService: AidUAService){}
     
     async create(dto: Prisma.AdminUncheckedCreateInput): Promise<Admin> {

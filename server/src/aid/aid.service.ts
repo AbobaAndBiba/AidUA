@@ -1,23 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { Aid, Prisma } from 'prisma/generated/client';
 import { AidUAService } from 'src/db/aid-ua.prisma.service';
-import { CRUD } from 'src/interfaces/crud.interface';
-import { CreateAidDto } from './dto/create-aid.dto';
 import { v4 } from "uuid";
+import { CreateAidDto } from './dto/create-aid.dto';
 import { UpdateAidDto } from './dto/update-aid.dto';
-
-export interface IAidServiceRequest {
-    createReq(dto: CreateAidDto): any,
-    getOneByIdReq(id: string): any,
-    getManyReq(): any,
-    updateReq(dto: UpdateAidDto, id: string): any
-    deleteReq(id: string): any,
-}
-
-export interface IAidService extends CRUD {
-    getOneByName(name: string): Promise<Aid | null>,
-    generateId(): Promise<string>
-}
+import { IAidService } from './interfaces/aid.service.interface';
+import { IAidServiceRequest } from './interfaces/aid.service.request.interface';
 
 @Injectable()
 export class AidService implements IAidService, IAidServiceRequest {
@@ -29,14 +17,14 @@ export class AidService implements IAidService, IAidServiceRequest {
             throw new HttpException('This aid already exists.', 400);
         const id = await this.generateId();
         const aid = await this.create({...dto, id});
-        return { aid };
+        return aid;
     }
 
     async getOneByIdReq(id: string) {
         const aid = await this.getOneById(id);
         if(!aid)
             throw new HttpException('This aid was not found.', 404);
-        return { aid };
+        return aid ;
     }
 
     async getManyReq() {
@@ -53,7 +41,7 @@ export class AidService implements IAidService, IAidServiceRequest {
                 throw new HttpException('This aid already exists.', 400);
             aid = await this.update(dto, id);
         }
-        return { aid };
+        return aid;
     }
 
     async deleteReq(id: string) {

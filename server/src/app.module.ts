@@ -5,6 +5,11 @@ import { DbModule } from './db/db.module';
 import { AuthModule } from './auth/auth.module';
 import { TokenModule } from './token/token.module';
 import { AidModule } from './aid/aid.module';
+import { RegionModule } from './region/region.module';
+import { CityModule } from './city/city.module';
+import { CoordinatesModule } from './coordinates/coordinates.module';
+import { AddressModule } from './address/address.module';
+import { PickupPointModule } from './pickup-point/pickup-point.module';
 
 @Module({
   controllers: [],
@@ -18,6 +23,11 @@ import { AidModule } from './aid/aid.module';
     AuthModule,
     TokenModule,
     AidModule,
+    RegionModule,
+    CityModule,
+    AddressModule,
+    CoordinatesModule,
+    PickupPointModule
   ]
 })
 export class AppModule {}
