@@ -1,0 +1,85 @@
+generator client {
+    provider      = "prisma-client-js"
+    output        = "./generated/client"
+    binaryTargets = ["native", "windows", "linux-musl"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("POSTGRESQL_URL")
+}
+
+model Admin {
+    id       String @id
+    login    String
+    password String
+}
+
+model City {
+    id       String        @id
+    name     String
+    regions  RegionCity[]
+    adresses CityAddress[]
+}
+
+model Region {
+    id     String       @id
+    name   String
+    cities RegionCity[]
+}
+
+model RegionCity {
+    city     City?   @relation(fields: [cityId], references: [id])
+    cityId   String
+    region   Region? @relation(fields: [regionId], references: [id])
+    regionId String
+
+    @@id([cityId, regionId])
+}
+
+model Address {
+    id     String        @id
+    name   String
+    cities CityAddress[]
+}
+
+model CityAddress {
+    id          String       @id
+    city        City?        @relation(fields: [cityId], references: [id])
+    cityId      String
+    address     Address?     @relation(fields: [addressId], references: [id])
+    addressId   String
+    pickupPoint PickupPoint?
+}
+
+model Coordinates {
+    id          String       @id
+    x           Float
+    y           Float
+    pickupPoint PickupPoint?
+}
+
+model PickupPoint {
+    id            String       @id
+    name          String
+    cityAddress   CityAddress? @relation(fields: [cityAddressId], references: [id])
+    cityAddressId String?      @unique
+    coordinates   Coordinates? @relation(fields: [coordinatesId], references: [id])
+    coordinatesId String?      @unique
+    aids          PointAid[]
+}
+
+model Aid {
+    id           String     @id
+    name         String
+    pickupPoints PointAid[]
+}
+
+model PointAid {
+    pickupPoint   PickupPoint? @relation(fields: [pickupPointId], references: [id])
+    pickupPointId String
+    aid           Aid?         @relation(fields: [aidId], references: [id])
+    aidId         String
+
+    @@id([pickupPointId, aidId])
+}
