@@ -6,9 +6,11 @@ import { AdminService } from './admin.service';
 @Module({
   controllers: [AdminController],
   providers: [AdminService],
+  imports: [
+    DbModule
+  ],
   exports: [
     AdminService
-  ],
-  imports: [DbModule]
+  ]
 })
 export class AdminModule {}

@@ -13,6 +13,7 @@ model Admin {
     id       String @id
     login    String
     password String
+    token    Token?
 }
 
 model City {
@@ -82,4 +83,12 @@ model PointAid {
     aidId         String
 
     @@id([pickupPointId, aidId])
+}
+
+model Token {
+    admin             Admin?   @relation(fields: [adminId], references: [id])
+    adminId           String?  @unique
+    accessToken       String   @id
+    isActive          Boolean
+    lastAuthorization DateTime @default(now())
 }
