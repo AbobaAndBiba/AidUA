@@ -11,6 +11,8 @@ import { CoordinatesModule } from './coordinates/coordinates.module';
 import { AddressModule } from './address/address.module';
 import { PickupPointModule } from './pickup-point/pickup-point.module';
 import { CityAddressModule } from './city-address/city-address.module';
+import { NewsModule } from './news/news.module';
+import { FileUploadModule } from './file-upload/file-upload.module';
 
 @Module({
   controllers: [],
@@ -29,7 +31,9 @@ import { CityAddressModule } from './city-address/city-address.module';
     CityAddressModule,
     AddressModule,
     CoordinatesModule,
-    PickupPointModule
+    PickupPointModule,
+    NewsModule,
+    FileUploadModule
   ]
 })
 export class AppModule {}

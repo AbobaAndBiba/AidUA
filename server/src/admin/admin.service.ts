@@ -1,13 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Admin, Prisma } from 'prisma/generated/client';
 import { AidUAService } from 'src/db/aid-ua.prisma.service';
-import { CRUD } from "../interfaces/crud.interface"
 import { v4 } from "uuid";
-
-export interface IAdminService extends CRUD {
-    getOneByLogin(login: string): Promise<Admin | null>,
-    generateId(): Promise<string>
-}
+import { IAdminService } from './interfaces/admin.service.interface';
 
 @Injectable()
 export class AdminService implements IAdminService {

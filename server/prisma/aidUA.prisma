@@ -92,3 +92,10 @@ model Token {
     isActive          Boolean
     lastAuthorization DateTime @default(now())
 }
+
+model News {
+    id        String   @id
+    text      String
+    image     String?
+    createdAt DateTime @default(now())
+}

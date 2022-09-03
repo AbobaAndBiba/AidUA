@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { NotFoundExceptionFilter } from "./filters/not-found-exception.filter";
 import { ValidationPipe } from "@nestjs/common";
+import { STATIC_PATH } from "./paths/paths";
 
 declare global {
   namespace Express {
@@ -19,6 +20,7 @@ const start = async () => {
   const httpAdapter = app.get(HttpAdapterHost);
   app.useGlobalFilters(new NotFoundExceptionFilter(httpAdapter));
   app.useGlobalPipes(new ValidationPipe);
+  app.useStaticAssets(STATIC_PATH);
   await app.listen(PORT, () => console.log(`The server has been started successfully on port: ${PORT}`));
 }
 
