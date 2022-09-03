@@ -1,4 +1,4 @@
-import { IsString, Length } from "class-validator";
+import { IsNotEmpty, IsString, Length } from "class-validator";
 
 export class CreatePickupPointDto {
     id?: string;
@@ -8,8 +8,10 @@ export class CreatePickupPointDto {
     name: string;
 
     @IsString({message: 'The cityAddressId must be a string.'})
+    @IsNotEmpty()
     cityAddressId: string;
 
     @IsString({message: 'The coordinatesId must be a string.'})
+    @IsNotEmpty()
     coordinatesId: string;
 }

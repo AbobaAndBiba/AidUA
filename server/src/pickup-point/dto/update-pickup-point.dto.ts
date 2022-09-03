@@ -1,4 +1,4 @@
-import { IsOptional, IsString, Length } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString, Length } from "class-validator";
 
 export class UpdatePickupPointDto {
     @IsOptional()
@@ -8,9 +8,11 @@ export class UpdatePickupPointDto {
 
     @IsOptional()
     @IsString({message: 'The cityAddressId must be a string.'})
+    @IsNotEmpty()
     cityAddressId: string;
 
     @IsOptional()
     @IsString({message: 'The coordinatesId must be a string.'})
+    @IsNotEmpty()
     coordinatesId: string;
 }

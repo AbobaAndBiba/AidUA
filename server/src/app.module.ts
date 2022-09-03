@@ -10,6 +10,7 @@ import { CityModule } from './city/city.module';
 import { CoordinatesModule } from './coordinates/coordinates.module';
 import { AddressModule } from './address/address.module';
 import { PickupPointModule } from './pickup-point/pickup-point.module';
+import { CityAddressModule } from './city-address/city-address.module';
 
 @Module({
   controllers: [],
@@ -25,6 +26,7 @@ import { PickupPointModule } from './pickup-point/pickup-point.module';
     AidModule,
     RegionModule,
     CityModule,
+    CityAddressModule,
     AddressModule,
     CoordinatesModule,
     PickupPointModule
