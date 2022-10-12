@@ -1,0 +1,71 @@
+@import "src/style/variables"
+.preview
+  width: 100%
+  height: 100vh
+  overflow: hidden
+  background-image: url("../../../img/Preview.jpg")
+  background-size: cover
+  text-align: center
+  color: $white
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)
+.wrap
+  background-color: rgba(0, 0, 0, 0.6)
+  width: 100%
+  height: 100%
+  box-sizing: border-box
+  padding: 100px 0 40px 0
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  align-items: center
+
+.topside
+  display: flex
+  flex-direction: column
+  gap: 25px
+  align-items: center
+  h1
+    font-weight: 700
+    font-size: 48px
+  hr
+    border: 0
+    height: 2px
+    width: 150px
+    background-color: $white
+  p
+    font-family: 'Roboto Mono', sans-serif
+    font-weight: 700
+    font-size: 32px
+    color: $white
+.underside
+  display: flex
+  flex-direction: column
+  gap: 20px
+  align-items: center
+  cursor: pointer
+  span
+    font-family: 'Roboto Mono', sans-serif
+    font-weight: 400
+    font-size: 24px
+    padding: 15px 25px
+    border: 1px solid $white
+
+  img
+    width: 30px
+    height: 30px
+    animation-name: bounce
+    animation-duration: 3s
+    animation-iteration-count: infinite
+    animation-direction: reverse
+  &:hover span
+
+    transform: scale(1.05)
+
+
+@keyframes bounce
+  from
+    transform: translateY(0)
+  50%
+    transform: translateY(20px)
+  to
+    transform: translateY(0)
