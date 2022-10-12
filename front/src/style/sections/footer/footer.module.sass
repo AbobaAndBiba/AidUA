@@ -1,0 +1,89 @@
+@import "src/style/variables"
+
+.footer
+  background-color: $dark
+  border-radius: 10px 10px 0 0
+
+  h3
+    font-size: 40px
+    color: $white
+
+  p
+    font-size: 24px
+    color: $white
+
+.wrap
+  display: flex
+  flex-direction: column
+  gap: 30px
+
+
+.nav
+  display: flex
+  justify-content: space-between
+  width: 100%
+  a
+    font-family: 'Roboto Mono', sans-serif
+    font-weight: 500
+    font-size: 24px
+    line-height: 32px
+    color: $light
+    &:hover
+      color: $white
+
+.contentSide
+  display: flex
+  width: 100%
+  justify-content: space-between
+
+.contacts
+  display: flex
+  flex-direction: column
+  gap: 15px
+  font-weight: 500
+
+
+
+
+  a
+    font-size: 20px
+    color: $white
+    &:hover
+      color: $light
+
+.other
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  align-items: flex-end
+
+.mail
+  display: flex
+  flex-direction: column
+  gap: 10px
+  align-items: flex-end
+
+.medias
+  display: flex
+  gap: 15px
+
+  &__youtube
+    background-color: #FF0000
+  &__instagram
+    background-color: #F00073
+  &__telegram
+    background-color: #0088CC
+  &__facebook
+    background-color: #1877F2
+
+
+  a
+    width: 50px
+    height: 50px
+    display: flex
+    align-items: center
+    justify-content: center
+    border-radius: 5px
+
+    &:hover
+      transform: scale(1.1)
