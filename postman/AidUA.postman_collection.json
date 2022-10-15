@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0ccc3dea-1cbe-418a-9c86-4eebe065c03a",
+		"_postman_id": "cedc6304-6729-4e7a-a5e9-b26a0abd22e4",
 		"name": "AidUA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -35,12 +35,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/auth/registration",
-							"protocol": "http",
+							"raw": "{{server-url}}/auth/registration",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"auth",
 								"registration"
@@ -76,12 +74,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/auth/login",
-							"protocol": "http",
+							"raw": "{{server-url}}/auth/login",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"auth",
 								"login"
@@ -117,12 +113,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/auth/logout",
-							"protocol": "http",
+							"raw": "{{server-url}}/auth/logout",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"auth",
 								"logout"
@@ -153,7 +147,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"heeelp\"\r\n}",
+							"raw": "{\r\n    \"authorName\": \"World Central Kitchen\",\r\n    \"registration\": \"Registration will have been proceding on Friday since 10:00 to 12:00 o'clock\",\r\n    \"phone\": \"+380111111111\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -161,15 +155,51 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/aid/",
-							"protocol": "http",
+							"raw": "{{server-url}}/aid/",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"aid",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add privileges",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"privileges\": [\r\n        \"Disabled\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/aid/add-privileges/ID",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"aid",
+								"add-privileges",
+								"ID"
 							]
 						}
 					},
@@ -181,12 +211,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/aid/",
-							"protocol": "http",
+							"raw": "{{server-url}}/aid/",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"aid",
 								""
@@ -201,12 +229,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/aid/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/aid/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"aid",
 								"ID"
@@ -232,7 +258,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"heeelpa\"\r\n}",
+							"raw": "{\r\n    \"authorName\": \"World Central Kitchen 2\",\r\n    \"registration\": \"Registration will have been proceding on Monday since 10:00 to 12:00 o'clock\",\r\n    \"phone\": \"+380111111112\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -240,12 +266,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/aid/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/aid/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"aid",
 								"ID"
@@ -279,14 +303,50 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/aid/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/aid/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"aid",
+								"ID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove privileges",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"privileges\": [\r\n        \"Disabled\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/aid/remove-privileges/ID",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"aid",
+								"remove-privileges",
 								"ID"
 							]
 						}
@@ -323,12 +383,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/address",
-							"protocol": "http",
+							"raw": "{{server-url}}/address",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"address"
 							]
@@ -342,12 +400,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/address",
-							"protocol": "http",
+							"raw": "{{server-url}}/address",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"address"
 							]
@@ -361,12 +417,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/address/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/address/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"address",
 								"ID"
@@ -400,12 +454,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/address/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/address/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"address",
 								"ID"
@@ -439,12 +491,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/address/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/address/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"address",
 								"ID"
@@ -483,12 +533,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/city",
-							"protocol": "http",
+							"raw": "{{server-url}}/city",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"city"
 							]
@@ -502,12 +550,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/city",
-							"protocol": "http",
+							"raw": "{{server-url}}/city",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"city"
 							]
@@ -521,12 +567,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/city/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/city/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"city",
 								"ID"
@@ -560,12 +604,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/city/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/city/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"city",
 								"ID"
@@ -599,174 +641,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/city/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/city/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"city",
-								"ID"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "CityAddress",
-			"item": [
-				{
-					"name": "Create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"cityId\": \"\",\r\n    \"addressId\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:5000/city-address",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"city-address"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get all",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:5000/city-address",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"city-address"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get one by ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:5000/city-address/ID",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"city-address",
-								"ID"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"cityId\": \"\",\r\n    \"addressId\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:5000/city-address/ID",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"city-address",
-								"ID"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:5000/city-address/ID",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"city-address",
 								"ID"
 							]
 						}
@@ -803,12 +683,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/coordinates",
-							"protocol": "http",
+							"raw": "{{server-url}}/coordinates",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"coordinates"
 							]
@@ -822,12 +700,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/coordinates",
-							"protocol": "http",
+							"raw": "{{server-url}}/coordinates",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"coordinates"
 							]
@@ -841,12 +717,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/coordinates/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/coordinates/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"coordinates",
 								"ID"
@@ -880,12 +754,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/coordinates/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/coordinates/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"coordinates",
 								"ID"
@@ -919,12 +791,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/coordinates/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/coordinates/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"coordinates",
 								"ID"
@@ -955,7 +825,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Help point\",\r\n    \"cityAddressId\":\"\",\r\n    \"coordinatesId\":\"\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Help point\",\r\n    \"cityId\":\"\",\r\n    \"regionId\":\"\",\r\n    \"districtId\":\"\",\r\n    \"addressId\":\"\",\r\n    \"coordinatesId\":\"\",\r\n    \"aidId\":\"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -963,12 +833,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/pickup-point",
-							"protocol": "http",
+							"raw": "{{server-url}}/pickup-point",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"pickup-point"
 							]
@@ -982,12 +850,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/pickup-point",
-							"protocol": "http",
+							"raw": "{{server-url}}/pickup-point",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"pickup-point"
 							]
@@ -1001,12 +867,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/pickup-point/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/pickup-point/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"pickup-point",
 								"ID"
@@ -1032,7 +896,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Rofl point\",\r\n    \"cityAddressId\":\"\",\r\n    \"coordinatesId\":\"\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Rofl point\",\r\n    \"cityId\":\"\",\r\n    \"regionId\":\"\",\r\n    \"districtId\":\"\",\r\n    \"addressId\":\"\",\r\n    \"coordinatesId\":\"\",\r\n    \"aidId\":\"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1040,12 +904,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/pickup-point/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/pickup-point/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"pickup-point",
 								"ID"
@@ -1079,12 +941,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/pickup-point/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/pickup-point/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"pickup-point",
 								"ID"
@@ -1123,12 +983,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/region",
-							"protocol": "http",
+							"raw": "{{server-url}}/region",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"region"
 							]
@@ -1142,12 +1000,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/region",
-							"protocol": "http",
+							"raw": "{{server-url}}/region",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"region"
 							]
@@ -1161,12 +1017,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/region/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/region/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"region",
 								"ID"
@@ -1200,12 +1054,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/region/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/region/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"region",
 								"ID"
@@ -1239,12 +1091,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/region/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/region/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"region",
 								"ID"
@@ -1282,19 +1132,28 @@
 									"type": "text"
 								},
 								{
+									"key": "title",
+									"value": "test title",
+									"type": "text"
+								},
+								{
+									"key": "link",
+									"value": "https://www.google.com/",
+									"type": "text"
+								},
+								{
 									"key": "image",
 									"type": "file",
-									"src": []
+									"src": [],
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:5000/news",
-							"protocol": "http",
+							"raw": "{{server-url}}/news",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"news"
 							]
@@ -1308,12 +1167,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/news",
-							"protocol": "http",
+							"raw": "{{server-url}}/news",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"news"
 							]
@@ -1327,12 +1184,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/news/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/news/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"news",
 								"ID"
@@ -1365,24 +1220,28 @@
 									"type": "text"
 								},
 								{
+									"key": "title",
+									"value": "new title",
+									"type": "text"
+								},
+								{
+									"key": "link",
+									"value": "https://www.youtube.com/",
+									"type": "text"
+								},
+								{
 									"key": "image",
 									"type": "file",
-									"src": []
+									"src": [],
+									"disabled": true
 								}
-							],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							]
 						},
 						"url": {
-							"raw": "http://localhost:5000/news/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/news/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"news",
 								"ID"
@@ -1416,14 +1275,522 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/news/ID",
-							"protocol": "http",
+							"raw": "{{server-url}}/news/ID",
 							"host": [
-								"localhost"
+								"{{server-url}}"
 							],
-							"port": "5000",
 							"path": [
 								"news",
+								"ID"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"World Central Kitchen\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/author",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"author"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-url}}/author",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"author"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-url}}/author/ID",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"author",
+								"ID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"World Central Kitchen 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/author/ID",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"author",
+								"ID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/author/ID",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"author",
+								"ID"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Privilege",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Disabled\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/privilege",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"privilege"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-url}}/privilege",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"privilege"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-url}}/privilege/ID",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"privilege",
+								"ID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Disabled 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/privilege/ID",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"privilege",
+								"ID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/privilege/ID",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"privilege",
+								"ID"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "District",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"District\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/district",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"district"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-url}}/district",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"district"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-url}}/district/ID",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"district",
+								"ID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"District 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/district/ID",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"district",
+								"ID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/district/ID",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"district",
 								"ID"
 							]
 						}
