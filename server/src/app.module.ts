@@ -10,9 +10,12 @@ import { CityModule } from './city/city.module';
 import { CoordinatesModule } from './coordinates/coordinates.module';
 import { AddressModule } from './address/address.module';
 import { PickupPointModule } from './pickup-point/pickup-point.module';
-import { CityAddressModule } from './city-address/city-address.module';
 import { NewsModule } from './news/news.module';
 import { FileUploadModule } from './file-upload/file-upload.module';
+import { AuthorModule } from './author/author.module';
+import { PrivilegeModule } from './privilege/privilege.module';
+import { PrivilegeToAidModule } from './privilege-to-aid/privilege-to-aid.module';
+import { DistrictModule } from './district/district.module';
 
 @Module({
   controllers: [],
@@ -28,12 +31,15 @@ import { FileUploadModule } from './file-upload/file-upload.module';
     AidModule,
     RegionModule,
     CityModule,
-    CityAddressModule,
     AddressModule,
     CoordinatesModule,
     PickupPointModule,
     NewsModule,
-    FileUploadModule
+    FileUploadModule,
+    AuthorModule,
+    PrivilegeModule,
+    PrivilegeToAidModule,
+    DistrictModule
   ]
 })
 export class AppModule {}

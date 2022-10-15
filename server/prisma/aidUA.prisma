@@ -17,72 +17,67 @@ model Admin {
 }
 
 model City {
-    id       String        @id
-    name     String
-    regions  RegionCity[]
-    adresses CityAddress[]
+    id           String        @id
+    name         String
+    pickupPoints PickupPoint[]
 }
 
 model Region {
-    id     String       @id
-    name   String
-    cities RegionCity[]
+    id           String        @id
+    name         String
+    pickupPoints PickupPoint[]
 }
 
-model RegionCity {
-    city     City?   @relation(fields: [cityId], references: [id])
-    cityId   String
-    region   Region? @relation(fields: [regionId], references: [id])
-    regionId String
-
-    @@id([cityId, regionId])
+model District {
+    id           String        @id
+    name         String
+    pickupPoints PickupPoint[]
 }
 
 model Address {
-    id     String        @id
-    name   String
-    cities CityAddress[]
-}
-
-model CityAddress {
-    id          String       @id
-    city        City?        @relation(fields: [cityId], references: [id])
-    cityId      String
-    address     Address?     @relation(fields: [addressId], references: [id])
-    addressId   String
-    pickupPoint PickupPoint?
+    id           String        @id
+    name         String
+    pickupPoints PickupPoint[]
 }
 
 model Coordinates {
-    id          String       @id
+    id          String        @id
     x           Float
     y           Float
-    pickupPoint PickupPoint?
+    pickupPoint PickupPoint[]
 }
 
 model PickupPoint {
     id            String       @id
     name          String
-    cityAddress   CityAddress? @relation(fields: [cityAddressId], references: [id])
-    cityAddressId String?      @unique
+    city          City?        @relation(fields: [cityId], references: [id])
+    cityId        String
+    region        Region?      @relation(fields: [regionId], references: [id])
+    regionId      String
+    district      District?    @relation(fields: [districtId], references: [id])
+    districtId    String
+    address       Address?     @relation(fields: [addressId], references: [id])
+    addressId     String
     coordinates   Coordinates? @relation(fields: [coordinatesId], references: [id])
-    coordinatesId String?      @unique
-    aids          PointAid[]
+    coordinatesId String
+    aid           Aid?         @relation(fields: [aidId], references: [id])
+    aidId         String
 }
 
 model Aid {
-    id           String     @id
-    name         String
-    pickupPoints PointAid[]
+    id           String           @id
+    registration String
+    phone        String
+    author       Author?          @relation(fields: [authorId], references: [id])
+    authorId     String?
+    privileges   PrivilegeToAid[]
+    pickupPoints PickupPoint[]
 }
 
-model PointAid {
-    pickupPoint   PickupPoint? @relation(fields: [pickupPointId], references: [id])
-    pickupPointId String
-    aid           Aid?         @relation(fields: [aidId], references: [id])
-    aidId         String
-
-    @@id([pickupPointId, aidId])
+model Author {
+    id   String @id
+    name String
+    aids Aid[]
 }
 
 model Token {
@@ -95,7 +90,24 @@ model Token {
 
 model News {
     id        String   @id
+    title     String
     text      String
     image     String?
+    link      String
     createdAt DateTime @default(now())
+}
+
+model Privilege {
+    id   String           @id
+    name String
+    aids PrivilegeToAid[]
+}
+
+model PrivilegeToAid {
+    aid         Aid?       @relation(fields: [aidId], references: [id])
+    aidId       String
+    privilege   Privilege? @relation(fields: [privilegeId], references: [id])
+    privilegeId String
+
+    @@id([aidId, privilegeId])
 }
