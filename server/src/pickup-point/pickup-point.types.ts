@@ -3,7 +3,7 @@ export type PickupPointFront = {
     city: string,
     region: string,
     district: string,
-    street: string,
+    address: string,
     registration: string,
     phone: string,
     author: string,

@@ -68,7 +68,6 @@ export class PickupPointController {
     @Post('/all')
     async getManyFront(@Body() filter: GetPickupPointsFrontDto) {
         filter = getPickupPointsFrontMapper.fromFrontToController(filter);
-        console.log(filter);
         return this.pickupPointService.getManyFront(filter);
     }
 
