@@ -28,7 +28,7 @@ class GetPickupPointsFrontMapper {
                 city: point.city.name,
                 region: point.region.name,
                 district: point.district.name,
-                street: point.address.name,
+                address: point.address.name,
                 lat: point.coordinates.x,
                 lng: point.coordinates.y,
                 registration: point.aid.registration,
