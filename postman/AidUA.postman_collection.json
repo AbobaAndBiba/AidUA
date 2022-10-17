@@ -845,6 +845,33 @@
 					"response": []
 				},
 				{
+					"name": "Get all front",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"where\": [\r\n        {\r\n            \"table\": \"\",\r\n            \"label\": \"\",\r\n            \"value\": [\r\n                \"\"\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/pickup-point/all",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"pickup-point",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get all",
 					"request": {
 						"method": "GET",
@@ -1173,6 +1200,26 @@
 							],
 							"path": [
 								"news"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all front",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server-url}}/news/all/2/0",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"news",
+								"all",
+								"2",
+								"0"
 							]
 						}
 					},

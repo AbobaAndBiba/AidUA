@@ -3,5 +3,6 @@ import { CRUD } from "src/interfaces/crud.interface";
 
 export interface IPickupPointRepository extends CRUD {
     getOneByName(name: string): Promise<PickupPoint | null>,
-    generateId(): Promise<string>
+    generateId(): Promise<string>,
+    getManyFront(filters: any): Promise<any>
 }

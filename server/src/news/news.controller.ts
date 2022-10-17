@@ -3,15 +3,18 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { FileUploadService } from 'src/file-upload/file-upload.service';
 import { IsLogedInGuard } from 'src/guards/is-loged-in.guard';
 import { IMAGES_PATH } from 'src/paths/paths';
+import { ParamToNumberPipe } from 'src/pipes/param-to-number.pipe';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-new.dto';
 import { createNewsMapper } from './mappers/create-news.mapper';
 import { updateNewsMapper } from './mappers/update-news.mapper';
 import { NewsRepository } from './news.repository';
+import { NewsService } from './news.service';
 
 @Controller('news')
 export class NewsController {
     constructor(private newsRepository: NewsRepository,
+                private newsService: NewsService,
                 private fileUpload: FileUploadService){}
 
     @Post()
@@ -26,6 +29,11 @@ export class NewsController {
             dto.image = imagePath;
         }
         return this.newsRepository.create({...dto, id});
+    }
+
+    @Get('/all/:limit/:offset')
+    async getManyFront(@Param('limit', ParamToNumberPipe) limit: number, @Param('offset', ParamToNumberPipe) offset: number){
+        return this.newsService.getManyFront(limit, offset);
     }
 
     @Get('/:id')

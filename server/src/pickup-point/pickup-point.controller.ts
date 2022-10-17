@@ -7,14 +7,18 @@ import { DistrictRepository } from 'src/district/district.repository';
 import { IsLogedInGuard } from 'src/guards/is-loged-in.guard';
 import { RegionRepository } from 'src/region/region.repository';
 import { CreatePickupPointDto } from './dto/create-pickup-point.dto';
+import { GetPickupPointsFrontDto } from './dto/get-pickup-points-front.dto';
 import { UpdatePickupPointDto } from './dto/update-pickup-point.dto';
 import { createPickupPointMapper } from './mappers/create-pickup-point.mapper';
+import { getPickupPointsFrontMapper } from './mappers/get-pickup-points-front.mapper';
 import { updatePickupPointMapper } from './mappers/update-pickup-point.mapper';
 import { PickupPointRepository } from './pickup-point.repository';
+import { PickupPointService } from './pickup-point.service';
 
 @Controller('pickup-point')
 export class PickupPointController {
     constructor(private pickupPointRepository: PickupPointRepository,
+                private pickupPointService: PickupPointService,
                 private cityRepository: CityRepository,
                 private regionRepository: RegionRepository,
                 private districtRepository: DistrictRepository,
@@ -59,6 +63,13 @@ export class PickupPointController {
             addressId: address.id,
             coordinatesId: coordinates.id
         });
+    }
+
+    @Post('/all')
+    async getManyFront(@Body() filter: GetPickupPointsFrontDto) {
+        filter = getPickupPointsFrontMapper.fromFrontToController(filter);
+        console.log(filter);
+        return this.pickupPointService.getManyFront(filter);
     }
 
     @Get('/:id')

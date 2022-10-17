@@ -69,7 +69,7 @@ model Aid {
     registration String
     phone        String
     author       Author?          @relation(fields: [authorId], references: [id])
-    authorId     String?
+    authorId     String
     privileges   PrivilegeToAid[]
     pickupPoints PickupPoint[]
 }

@@ -3,5 +3,6 @@ import { CRUD } from "src/interfaces/crud.interface";
 
 export interface INewsRepository extends CRUD {
     getByDate(date: Date): Promise<News[]>,
-    generateId(): Promise<string>
+    generateId(): Promise<string>,
+    getTotal(): Promise<number>
 }

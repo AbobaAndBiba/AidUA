@@ -4,6 +4,7 @@ import { AidUAService } from 'src/db/aid-ua.prisma.service';
 import { INewsRepository } from './interfaces/news.repository.interface';
 import { v4 } from "uuid";
 import { FileUploadService } from 'src/file-upload/file-upload.service';
+import { isNumber } from 'class-validator';
 
 @Injectable()
 export class NewsRepository implements INewsRepository {
@@ -18,8 +19,19 @@ export class NewsRepository implements INewsRepository {
         return this.aidUAService.news.findUnique({where: {id}});
     }
 
-    async getMany(): Promise<News[]> {
-        return this.aidUAService.news.findMany();
+    async getTotal(): Promise<number> {
+        return (await this.aidUAService.news.aggregate({
+            _count: true
+        }))._count;
+    }
+
+    async getMany(limit?: number, offset?: number): Promise<News[]> {
+        if(isNumber(limit) && isNumber(offset))
+            return this.aidUAService.news.findMany({
+                orderBy: {createdAt: 'desc'},
+                skip: offset, take: limit
+            });
+        return this.aidUAService.news.findMany({orderBy: {createdAt: 'desc'}});
     }
 
     async getByDate(date: Date): Promise<News[]> {
