@@ -3,20 +3,20 @@ import { AddressService } from './address.service';
 import { AddressController } from './address.controller';
 import { DbModule } from 'src/db/db.module';
 import { TokenModule } from 'src/token/token.module';
-
-const addressServiceProvider = {
-  provide: 'IAddressServiceRequest',
-  useClass: AddressService
-}
+import { AddressRepository } from './address.repository';
 
 @Module({
   controllers: [AddressController],
   providers: [
-    addressServiceProvider
+    AddressService,
+    AddressRepository
   ],
   imports: [
     DbModule,
     TokenModule
+  ],
+  exports: [
+    AddressRepository
   ]
 })
 export class AddressModule {}

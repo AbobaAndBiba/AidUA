@@ -7,12 +7,32 @@ export class UpdatePickupPointDto {
     name: string;
 
     @IsOptional()
-    @IsString({message: 'The cityAddressId must be a string.'})
+    @IsString({message: 'The cityId must be a string.'})
     @IsNotEmpty()
-    cityAddressId: string;
+    cityId?: string;
+
+    @IsOptional()
+    @IsString({message: 'The regionId must be a string.'})
+    @IsNotEmpty()
+    regionId?: string;
+
+    @IsOptional()
+    @IsString({message: 'The districtId must be a string.'})
+    @IsNotEmpty()
+    districtId?: string;
+
+    @IsOptional()
+    @IsString({message: 'The addressId must be a string.'})
+    @IsNotEmpty()
+    addressId?: string;
 
     @IsOptional()
     @IsString({message: 'The coordinatesId must be a string.'})
     @IsNotEmpty()
-    coordinatesId: string;
+    coordinatesId?: string;
+
+    @IsOptional()
+    @IsString({message: 'The aidId must be a string.'})
+    @IsNotEmpty()
+    aidId?: string;
 }

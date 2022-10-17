@@ -3,16 +3,15 @@ import { DbModule } from 'src/db/db.module';
 import { FileUploadModule } from 'src/file-upload/file-upload.module';
 import { TokenModule } from 'src/token/token.module';
 import { NewsController } from './news.controller';
+import { NewsRepository } from './news.repository';
 import { NewsService } from './news.service';
-
-const newsServiceProvider = {
-  provide: 'INewsServiceRequest',
-  useClass: NewsService
-};
 
 @Module({
   controllers: [NewsController],
-  providers: [newsServiceProvider],
+  providers: [
+    NewsService,
+    NewsRepository
+  ],
   imports: [
     DbModule,
     FileUploadModule,

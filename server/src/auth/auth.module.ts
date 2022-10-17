@@ -7,7 +7,9 @@ import { AuthService } from './auth.service';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [
+    AuthService
+  ],
   imports: [
     DbModule,
     AdminModule,

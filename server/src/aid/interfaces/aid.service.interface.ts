@@ -1,7 +1,6 @@
-import { Aid } from "prisma/generated/client";
-import { CRUD } from "src/interfaces/crud.interface";
+import { Privilege } from "prisma/generated/client";
 
-export interface IAidService extends CRUD {
-    getOneByName(name: string): Promise<Aid | null>,
-    generateId(): Promise<string>
+export interface IAidService{
+    addPrivileges(privileges: string[], aidId: string): Promise<Privilege[]>,
+    removePrivileges(privileges: string[], aidId: string): Promise<Privilege[]>,
 }

@@ -1,42 +1,80 @@
-import { Body, Controller, Delete, Get, HttpCode, Inject, Param, Patch, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpException, Param, Patch, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { FileUploadService } from 'src/file-upload/file-upload.service';
 import { IsLogedInGuard } from 'src/guards/is-loged-in.guard';
+import { IMAGES_PATH } from 'src/paths/paths';
+import { ParamToNumberPipe } from 'src/pipes/param-to-number.pipe';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-new.dto';
-import { INewsServiceRequest } from './interfaces/news.service.request.interface';
+import { createNewsMapper } from './mappers/create-news.mapper';
+import { updateNewsMapper } from './mappers/update-news.mapper';
+import { NewsRepository } from './news.repository';
+import { NewsService } from './news.service';
 
 @Controller('news')
 export class NewsController {
-    constructor(@Inject('INewsServiceRequest') private readonly newsService: INewsServiceRequest){}
+    constructor(private newsRepository: NewsRepository,
+                private newsService: NewsService,
+                private fileUpload: FileUploadService){}
 
     @Post()
     @UseGuards(IsLogedInGuard)
     @UseInterceptors(FileInterceptor('image'))
     @HttpCode(201)
-    create(@Body() dto: CreateNewsDto, @UploadedFile() image: Express.Multer.File) {
-        return this.newsService.createReq(dto, image);
+    async create(@Body() dto: CreateNewsDto, @UploadedFile() image: Express.Multer.File) {
+        dto = createNewsMapper.fromControllerToService(dto);
+        const id = await this.newsRepository.generateId();
+        if(image) {
+            const imagePath = this.fileUpload.uploadFile(image, IMAGES_PATH);
+            dto.image = imagePath;
+        }
+        return this.newsRepository.create({...dto, id});
+    }
+
+    @Get('/all/:limit/:offset')
+    async getManyFront(@Param('limit', ParamToNumberPipe) limit: number, @Param('offset', ParamToNumberPipe) offset: number){
+        return this.newsService.getManyFront(limit, offset);
     }
 
     @Get('/:id')
-    getOneById(@Param('id') id: string) {
-        return this.newsService.getOneByIdReq(id);
+    async getOneById(@Param('id') id: string) {
+        const news = await this.newsRepository.getOneById(id);
+        if(!news)
+            throw new HttpException('This news was not found', 404);
+        return news;
     }
 
     @Get()
-    getMany(){
-        return this.newsService.getManyReq();
+    async getMany(){
+        return this.newsRepository.getMany();
     }
 
     @Patch('/:id')
     @UseGuards(IsLogedInGuard)
     @UseInterceptors(FileInterceptor('image'))
-    update(@Body() dto: UpdateNewsDto, @Param('id') id: string, @UploadedFile() image: Express.Multer.File){
-        return this.newsService.updateReq(dto, id, image);
+    async update(@Body() dto: UpdateNewsDto, @Param('id') id: string, @UploadedFile() image: Express.Multer.File){
+        dto = updateNewsMapper.fromControllerToService(dto);
+        let news = await this.newsRepository.getOneById(id);
+        if(!news)
+            throw new HttpException('This news was not found', 404);
+        if(image) {
+            if(news.image)
+                this.fileUpload.deleteFile(news.image);
+            const imagePath = this.fileUpload.uploadFile(image, IMAGES_PATH);
+            dto.image = imagePath;
+        }
+        return this.newsRepository.update(dto, news.id);
     }
 
     @Delete('/:id')
     @UseGuards(IsLogedInGuard)
-    delete(@Param('id') id: string){
-        return this.newsService.deleteReq(id);
+    async delete(@Param('id') id: string){
+        const news = await this.newsRepository.getOneById(id);
+        if(!news)
+            throw new HttpException('This news was not found', 404);
+        if(news.image)
+            this.fileUpload.deleteFile(news.image);
+        await this.newsRepository.delete(news.id);
+        return { message: 'The news has been delete successfully.' };
     }
 }
