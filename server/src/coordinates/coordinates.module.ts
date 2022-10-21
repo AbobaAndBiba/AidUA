@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { CoordinatesService } from './coordinates.service';
 import { CoordinatesController } from './coordinates.controller';
 import { DbModule } from 'src/db/db.module';
 import { TokenModule } from 'src/token/token.module';
 import { CoordinatesRepository } from './coordinates.repository';
+import { PickupPointModule } from 'src/pickup-point/pickup-point.module';
 
 @Module({
   controllers: [CoordinatesController],
@@ -13,7 +14,8 @@ import { CoordinatesRepository } from './coordinates.repository';
   ],
   imports: [
     DbModule,
-    TokenModule
+    TokenModule,
+    forwardRef(() => PickupPointModule),
   ],
   exports: [
     CoordinatesRepository

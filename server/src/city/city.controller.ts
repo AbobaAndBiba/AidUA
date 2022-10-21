@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpException, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { IsLogedInGuard } from 'src/guards/is-loged-in.guard';
+import { PickupPointRepository } from 'src/pickup-point/pickup-point.repository';
 import { CityRepository } from './city.repository';
 import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto } from './dto/update-city.dto';
@@ -8,7 +9,8 @@ import { updateCityMapper } from './mappers/update-city.mapper';
 
 @Controller('city')
 export class CityController {
-    constructor(private cityRepository: CityRepository){}
+    constructor(private cityRepository: CityRepository,
+                private pickupPointRepository: PickupPointRepository){}
 
     @Post()
     @UseGuards(IsLogedInGuard)
@@ -58,6 +60,7 @@ export class CityController {
         const city = await this.cityRepository.getOneById(id);
         if(!city)
             throw new HttpException('This city not found.', 404);
+        await this.pickupPointRepository.deleteManyByCityId(city.id);
         await this.cityRepository.delete(city.id);
         return { message: 'The city has been delete successfully'};
     }

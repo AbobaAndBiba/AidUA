@@ -1,6 +1,8 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpException, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { AidRepository } from 'src/aid/aid.repository';
 import { IsLogedInGuard } from 'src/guards/is-loged-in.guard';
 import { AuthorRepository } from './author.repository';
+import { AuthorService } from './author.service';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
 import { createAuthorMapper } from './mappers/create-author.mapper';
@@ -8,7 +10,9 @@ import { updateAuthorMapper } from './mappers/update-author.mapper';
 
 @Controller('author')
 export class AuthorController {
-    constructor(private authorRepository: AuthorRepository){}
+    constructor(private authorRepository: AuthorRepository,
+                private authorService: AuthorService,
+                private aidRepository: AidRepository){}
 
     @Post()
     @UseGuards(IsLogedInGuard)
@@ -58,6 +62,9 @@ export class AuthorController {
         const author = await this.authorRepository.getOneById(id);
         if(!author)
             throw new HttpException('This author was not found', 404);
+        await this.authorService.deleteManyPrivilegeToAidsByAuthorId(author.id);
+        await this.authorService.deleteManyPickupPointsByAuthorId(author.id);
+        await this.aidRepository.deleteManyByAuthorId(author.id);
         await this.authorRepository.delete(author.id);
         return { message: 'The author has been delete successfully'};
     }

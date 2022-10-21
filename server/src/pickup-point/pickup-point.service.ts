@@ -18,23 +18,17 @@ export class PickupPointService  {
         let res = {};
         for(const obj of dto.where) {
             const OR = [];
-            for(const item of obj.value){
+            for(const item of obj.value) {
                 if(obj.label === 'author'){
                     OR.push({
-                        [obj.label]: {
-                            name: item
-                        }
+                        name: item
                     });
                     continue;
                 }
                 if(obj.label === 'privileges') {
                     OR.push({
-                        [obj.label]: {
-                            some: {
-                                privilege: {
-                                    name: item
-                                }
-                            }
+                        privilege: {
+                            name: item
                         }
                     });
                     continue;
@@ -43,16 +37,27 @@ export class PickupPointService  {
                     name: item
                 });
             }
-            if(obj.label === 'privileges' || obj.label === 'author') {
+            if(obj.label === 'privileges') {
                 res['aid'] = {
-                    OR
+                    [obj.label]: {
+                        some: {
+                            OR
+                        }
+                    }
+                };
+                continue;
+            }
+            if(obj.label === 'author') {
+                res['aid'] = {
+                    [obj.label]: {
+                        OR
+                    }
                 };
                 continue;
             }
             res[obj.label] = {
                 OR
             };
-            continue;
         }
         return res;
     }

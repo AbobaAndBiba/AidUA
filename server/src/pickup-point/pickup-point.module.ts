@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AddressModule } from 'src/address/address.module';
 import { AidModule } from 'src/aid/aid.module';
 import { CityModule } from 'src/city/city.module';
@@ -21,13 +21,16 @@ import { PickupPointService } from './pickup-point.service';
   imports:[
     DbModule,
     TokenModule,
-    CityModule,
-    CoordinatesModule,
-    AidModule,
-    RegionModule,
-    DistrictModule,
-    AddressModule,
+    forwardRef(() => CityModule),
+    forwardRef(() => CoordinatesModule),
+    forwardRef(() => AidModule),
+    forwardRef(() => RegionModule),
+    forwardRef(() => DistrictModule),
+    forwardRef(() => AddressModule),
     PrivilegeToAidModule
+  ],
+  exports: [
+    PickupPointRepository
   ]
 })
 export class PickupPointModule {}

@@ -28,6 +28,14 @@ export class AidRepository implements IAidRepository {
         return this.aidUAService.aid.delete({where: {id}});
     }
 
+    async deleteManyByAuthorId(authorId: string): Promise<Prisma.BatchPayload> {
+        return this.aidUAService.aid.deleteMany({where: {authorId}});
+    }
+
+    async getManyByAuthorId(authorId: string): Promise<Aid[]> {
+        return this.aidUAService.aid.findMany({where: {authorId}});
+    }
+
     async generateId(): Promise<string> {
         let aid: Aid | null, id: string;
         do {

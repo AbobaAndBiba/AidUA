@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpException, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { AuthorRepository } from 'src/author/author.repository';
 import { IsLogedInGuard } from 'src/guards/is-loged-in.guard';
+import { PickupPointRepository } from 'src/pickup-point/pickup-point.repository';
 import { PrivilegeToAidRepository } from 'src/privilege-to-aid/privilege-to-aid.repository';
 import { AidRepository } from './aid.repository';
 import { AidService } from './aid.service';
@@ -18,7 +19,8 @@ export class AidController {
     constructor(private aidRepository: AidRepository,
                 private aidService: AidService,
                 private authorRepository: AuthorRepository,
-                private privilegeToAidRepository: PrivilegeToAidRepository){}
+                private privilegeToAidRepository: PrivilegeToAidRepository,
+                private pickupPointRepository: PickupPointRepository){}
 
     @Post()
     @UseGuards(IsLogedInGuard)
@@ -78,6 +80,7 @@ export class AidController {
         const aid = await this.aidRepository.getOneById(id);
         if(!aid)
             throw new HttpException('This aid was not found.', 404);
+        await this.pickupPointRepository.deleteManyByAidId(aid.id);
         await this.privilegeToAidRepository.deleteManyByAidId(aid.id);
         await this.aidRepository.delete(aid.id);
         return { message: 'The aid has been delete successfully.' };

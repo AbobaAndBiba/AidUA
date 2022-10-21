@@ -1,6 +1,7 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AuthorModule } from 'src/author/author.module';
 import { DbModule } from 'src/db/db.module';
+import { PickupPointModule } from 'src/pickup-point/pickup-point.module';
 import { PrivilegeToAidModule } from 'src/privilege-to-aid/privilege-to-aid.module';
 import { PrivilegeModule } from 'src/privilege/privilege.module';
 import { TokenModule } from 'src/token/token.module';
@@ -17,9 +18,10 @@ import { AidService } from './aid.service';
   imports: [
     DbModule,
     TokenModule,
-    AuthorModule,
+    forwardRef(() => AuthorModule),
     PrivilegeModule,
-    PrivilegeToAidModule
+    PrivilegeToAidModule,
+    forwardRef(() => PickupPointModule),
   ],
   exports: [
     AidRepository,
