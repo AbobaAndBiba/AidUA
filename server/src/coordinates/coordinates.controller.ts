@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpException, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { IsLogedInGuard } from 'src/guards/is-loged-in.guard';
+import { PickupPointRepository } from 'src/pickup-point/pickup-point.repository';
 import { CoordinatesRepository } from './coordinates.repository';
 import { CreateCoordinatesDto } from './dto/create-coordinates.dto';
 import { UpdateCoordinatesDto } from './dto/update-coordinates.dto';
@@ -8,7 +9,8 @@ import { updateCoordinatesMapper } from './mappers/update-coordinates.mapper';
 
 @Controller('coordinates')
 export class CoordinatesController {
-    constructor(private coordinatesRepository: CoordinatesRepository){}
+    constructor(private coordinatesRepository: CoordinatesRepository,
+                private pickupPointRepository: PickupPointRepository){}
 
     @Post()
     @UseGuards(IsLogedInGuard)
@@ -58,6 +60,7 @@ export class CoordinatesController {
         const coordinates = await this.coordinatesRepository.getOneById(id);
         if(!coordinates)
             throw new HttpException('This coordinates not found.', 404);
+        await this.pickupPointRepository.deleteManyByCoordinatesId(coordinates.id);
         await this.coordinatesRepository.delete(coordinates.id);
         return { message:'The coordinates has been delete successfully' };
     }

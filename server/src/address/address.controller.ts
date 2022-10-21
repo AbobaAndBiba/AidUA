@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpException, Inject, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { IsLogedInGuard } from 'src/guards/is-loged-in.guard';
+import { PickupPointRepository } from 'src/pickup-point/pickup-point.repository';
 import { AddressRepository } from './address.repository';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
@@ -8,7 +9,8 @@ import { updateAddressMapper } from './mappers/update-address.mapper';
 
 @Controller('address')
 export class AddressController {
-    constructor( private addressRepository: AddressRepository){}
+    constructor(private addressRepository: AddressRepository,
+                private pickupPointRepository: PickupPointRepository){}
 
     @Post()
     @UseGuards(IsLogedInGuard)
@@ -57,6 +59,7 @@ export class AddressController {
         const address = await this.addressRepository.getOneById(id);
         if(!address)
             throw new HttpException('This address not found.', 404);
+        await this.pickupPointRepository.deleteManyByAddressId(address.id);
         await this.addressRepository.delete(address.id);
         return { message:'The address has been delete successfully' };
     }

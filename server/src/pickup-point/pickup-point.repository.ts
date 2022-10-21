@@ -72,6 +72,30 @@ export class PickupPointRepository implements IPickupPointRepository {
         return this.aidUAService.pickupPoint.delete({where: {id}});
     }
 
+    async deleteManyByCityId(cityId: string): Promise<Prisma.BatchPayload> {
+        return this.aidUAService.pickupPoint.deleteMany({where: {cityId}});
+    }
+
+    async deleteManyByRegionId(regionId: string): Promise<Prisma.BatchPayload> {
+        return this.aidUAService.pickupPoint.deleteMany({where: {regionId}});
+    }
+
+    async deleteManyByDistrictId(districtId: string): Promise<Prisma.BatchPayload> {
+        return this.aidUAService.pickupPoint.deleteMany({where: {districtId}});
+    }
+
+    async deleteManyByAddressId(addressId: string): Promise<Prisma.BatchPayload> {
+        return this.aidUAService.pickupPoint.deleteMany({where: {addressId}});
+    }
+
+    async deleteManyByCoordinatesId(coordinatesId: string): Promise<Prisma.BatchPayload> {
+        return this.aidUAService.pickupPoint.deleteMany({where: {coordinatesId}});
+    }
+
+    async deleteManyByAidId(aidId: string): Promise<Prisma.BatchPayload> {
+        return this.aidUAService.pickupPoint.deleteMany({where: {aidId}});
+    }
+
     async generateId(): Promise<string>{
         let pickupPoint: PickupPoint | null, id: string;
         do {
