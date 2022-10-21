@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpException, Inject, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { IsLogedInGuard } from 'src/guards/is-loged-in.guard';
+import { PickupPointRepository } from 'src/pickup-point/pickup-point.repository';
 import { CreateRegionDto } from './dto/create-region.dto';
 import { UpdateRegionDto } from './dto/update-region.dto';
 import { createRegionMapper } from './mappers/create-region.mapper';
@@ -8,7 +9,8 @@ import { RegionRepository } from './region.repository';
 
 @Controller('region')
 export class RegionController {
-    constructor(private regionRepository: RegionRepository){}
+    constructor(private regionRepository: RegionRepository,
+                private pickupPointRepository: PickupPointRepository){}
 
     @Post()
     @UseGuards(IsLogedInGuard)
@@ -58,6 +60,7 @@ export class RegionController {
         const region = await this.regionRepository.getOneById(id);
         if(!region)
             throw new HttpException('This region not found.', 404);
+        await this.pickupPointRepository.deleteManyByRegionId(region.id);
         await this.regionRepository.delete(region.id);
         return { message: 'The region has been delete successfully'};
     }

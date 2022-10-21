@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AddressService } from './address.service';
 import { AddressController } from './address.controller';
 import { DbModule } from 'src/db/db.module';
 import { TokenModule } from 'src/token/token.module';
 import { AddressRepository } from './address.repository';
+import { PickupPointModule } from 'src/pickup-point/pickup-point.module';
 
 @Module({
   controllers: [AddressController],
@@ -13,7 +14,8 @@ import { AddressRepository } from './address.repository';
   ],
   imports: [
     DbModule,
-    TokenModule
+    TokenModule,
+    forwardRef(() => PickupPointModule),
   ],
   exports: [
     AddressRepository

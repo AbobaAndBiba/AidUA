@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { DbModule } from 'src/db/db.module';
+import { PickupPointModule } from 'src/pickup-point/pickup-point.module';
 import { TokenModule } from 'src/token/token.module';
 import { CityController } from './city.controller';
 import { CityRepository } from './city.repository';
@@ -13,7 +14,8 @@ import { CityService } from './city.service';
   ],
   imports:[
     DbModule,
-    TokenModule
+    TokenModule,
+    forwardRef(() => PickupPointModule),
   ],
   exports: [
     CityRepository
