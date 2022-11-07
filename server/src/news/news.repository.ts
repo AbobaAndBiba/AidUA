@@ -3,13 +3,11 @@ import { News, Prisma } from 'prisma/generated/client';
 import { AidUAService } from 'src/db/aid-ua.prisma.service';
 import { INewsRepository } from './interfaces/news.repository.interface';
 import { v4 } from "uuid";
-import { FileUploadService } from 'src/file-upload/file-upload.service';
 import { isNumber } from 'class-validator';
 
 @Injectable()
 export class NewsRepository implements INewsRepository {
-    constructor(private aidUAService: AidUAService,
-                private fileUpload: FileUploadService){}
+    constructor(private aidUAService: AidUAService){}
 
     async create(dto: Prisma.NewsUncheckedCreateInput): Promise<News> {
         return this.aidUAService.news.create({data: dto});

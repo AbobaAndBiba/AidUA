@@ -1,8 +1,8 @@
-import { IsOptional, IsString, Length } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString, Length } from "class-validator";
 
 export class UpdateNewsDto {
-    @IsOptional()
-    @Length(1, 300, {message: 'The image can contain: 2 min and 300 max characters.'})
+    @IsString({message: 'The image must be a string.'})
+    @IsNotEmpty({message: "The image can't be empty."})
     image?: string;
 
     @IsOptional()
