@@ -851,7 +851,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"where\": [\r\n        {\r\n            \"table\": \"\",\r\n            \"label\": \"\",\r\n            \"value\": [\r\n                \"\"\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"where\": [\r\n        {\r\n            \"label\": \"privileges\",\r\n            \"value\": [\r\n                \"Disabled\"\r\n            ]\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1151,30 +1151,13 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "text",
-									"value": "news 1",
-									"type": "text"
-								},
-								{
-									"key": "title",
-									"value": "test title",
-									"type": "text"
-								},
-								{
-									"key": "link",
-									"value": "https://www.google.com/",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"type": "file",
-									"src": [],
-									"disabled": true
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"news 1\",\r\n    \"title\": \"test title\",\r\n    \"link\": \"https://www.google.com/\",\r\n    \"image\": \"https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
 						"url": {
 							"raw": "{{server-url}}/news",
@@ -1259,30 +1242,13 @@
 						"method": "PATCH",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "text",
-									"value": "new text",
-									"type": "text"
-								},
-								{
-									"key": "title",
-									"value": "new title",
-									"type": "text"
-								},
-								{
-									"key": "link",
-									"value": "https://www.youtube.com/",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"type": "file",
-									"src": [],
-									"disabled": true
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"new text\",\r\n    \"title\": \"new title\",\r\n    \"link\": \"https://www.youtube.com/\",\r\n    \"image\": \"https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
 						"url": {
 							"raw": "{{server-url}}/news/ID",
