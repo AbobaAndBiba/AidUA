@@ -1,20 +1,51 @@
 import React from 'react';
-import classes from '../../../style/sections/footer/footer.module.sass'
+import classes from './footer.module.sass'
 import youtube from '../../../img/s-medias/youtube.svg'
 import instagram from '../../../img/s-medias/instagram.svg'
 import facebook from '../../../img/s-medias/facebook.svg'
 import telegram from '../../../img/s-medias/telegram.svg'
+import {Link} from "react-scroll";
 
 const Footer = () => {
     return (
-        <footer className={`section ${classes.footer}`}>
+        <footer className={`section ${classes.footer}`} id="footer">
             <div className={`wrap ${classes.wrap}`}>
                 <div className={classes.nav}>
-                    <a href="">Наша місія</a>
-                    <a href="">Як отримати допомогу</a>
-                    <a href="">Новини</a>
-                    <a href="">Точки видачі</a>
-                    <a href="">Контакти</a>
+                    <Link
+                      activeClass="active"
+                      to="howToTake"
+                      spy={true}
+                      smooth={true}
+                      offset={-70}
+                      duration={500}>Як отримати допомогу</Link>
+                    <Link
+                      activeClass="active"
+                      to="news"
+                      spy={true}
+                      smooth={true}
+                      offset={-150}
+                      duration={500}>Новини</Link>
+                    <Link
+                      activeClass="active"
+                      to="map"
+                      spy={true}
+                      smooth={true}
+                      offset={-130}
+                      duration={500}>Точки видачі</Link>
+                    <Link
+                      activeClass="active"
+                      to="mission"
+                      spy={true}
+                      smooth={true}
+                      offset={-270}
+                      duration={500}>Наша місія</Link>
+                    <Link
+                      activeClass="active"
+                      to="footer"
+                      spy={true}
+                      smooth={true}
+                      offset={-70}
+                      duration={500}>Контакти</Link>
                 </div>
                 <div className={classes.contentSide}>
                     <div className={classes.contacts}>

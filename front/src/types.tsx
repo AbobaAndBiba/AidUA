@@ -4,7 +4,7 @@ export interface IPointItem{
   district: string
   registration: string
   phone: string
-  privileges: string
+  privileges: string[]
   author: string
   lat: number
   lng: number

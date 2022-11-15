@@ -1,9 +1,11 @@
 import {combineReducers} from "redux";
-import {mapPointReducer} from "./mapPointReducer";
+import {newsReducer} from "./newsReducer";
+import {pointsReducer} from "./pointsReducer";
 
 
 export const rootReducer = combineReducers({
-  points: mapPointReducer
+  news: newsReducer,
+  points: pointsReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

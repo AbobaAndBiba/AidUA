@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '../../../style/sections/copyright/copyright.module.sass'
+import classes from './copyright.module.sass'
 import logo from '../../../img/logo.png'
 
 const Copyright = () => {

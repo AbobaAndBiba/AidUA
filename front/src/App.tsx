@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import Preview from "./components/sections/preview/preview";
 import "./style/app.sass";
 import Header from "./components/sections/header/header";
