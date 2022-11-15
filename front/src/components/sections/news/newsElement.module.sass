@@ -1,0 +1,47 @@
+@import "../../../style/variables"
+.newsItem
+  width: 100%
+  height: 395px
+  border-radius: 10px
+  background-size: cover
+  background-position: center
+  &:hover &__wrap
+    background: rgba(0, 0, 0, 0.5)
+
+  &__wrap
+    background: rgba(0, 0, 0, 0.35)
+    width: 100%
+    height: 100%
+    border-radius: 10px
+    padding: 20px
+  &__vertical
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    height: 100%
+    width: 100%
+    div
+      display: flex
+      flex-direction: column
+      gap: 10px
+      width: 100%
+      align-items: flex-end
+      h4
+        font-weight: 500
+        font-size: 26px
+        line-height: 120%
+        text-align: right
+        color: $white
+      p
+        font-weight: 500
+        font-size: 18px
+        line-height: 120%
+        text-align: right
+        color: $light
+
+
+.date
+  font-weight: 700
+  font-size: 18px
+  line-height: 120%
+  color: $light50

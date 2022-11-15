@@ -1,10 +1,11 @@
 import React from 'react';
 import classes from '../../../style/sections/mission + howToTake/infoSection.module.sass'
 import missionPhoto from '../../../img/aboutPicture.jpg'
+import PointButton from "../../UI/pointButton/pointButton";
 
 const Mission = () => {
     return (
-        <section className={`${classes.mission} section`}>
+        <section className={`${classes.mission} section`} id="mission">
             <div className={`wrap ${classes.wrap}`}>
 
                 <div className={classes.contentColumn}>
@@ -17,7 +18,7 @@ const Mission = () => {
                         інформацію кожен день, гарантуючи людям
                         надійність і впевненість в такий непростий час.
                         Віримо в ЗСУ. Все буде Україна!</p>
-                    <a href="" className="pointButton">Пункти видачі</a>
+                    <PointButton/>
                 </div>
                 <img src={missionPhoto} className={classes.image} alt=""/>
 

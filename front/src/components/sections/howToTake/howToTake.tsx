@@ -1,10 +1,11 @@
 import React from 'react';
 import classes from '../../../style/sections/mission + howToTake/infoSection.module.sass'
 import gymHelp from '../../../img/gymHelp.jpg'
+import PointButton from "../../UI/pointButton/pointButton";
 
 const HowToTake = () => {
     return (
-        <section className={`${classes.howToTake} section`}>
+        <section className={`${classes.howToTake} section`} id="howToTake">
             <div className={`wrap ${classes.wrap}`}>
                 <img src={gymHelp} className={classes.image} alt=""/>
                 <div className={classes.contentColumn}>
@@ -14,7 +15,7 @@ const HowToTake = () => {
                         Для дітей молодше 14 років необхідно свідоцтво про народження і присутність одного з опікунів.
                     </p>
                     <p>Отримання гуманітарної допомоги проходить у форматі черги або за записом, де кожному з нужденних видають продовольчу  і при необхідності надають медичну та психологічну допомогу.</p>
-                    <a href="" className="pointButton">Пункти видачі</a>
+                    <PointButton/>
                 </div>
 
             </div>

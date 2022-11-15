@@ -1,25 +1,33 @@
 import React from 'react';
-import classes from "../../../style/sections/preview/preview.module.sass";
+import classes from "./preview.module.sass";
 import arrowDown from '../../../img/arrow-down.svg';
+import {Link} from "react-scroll";
+import { Parallax } from 'react-parallax';
 
 const Preview = () => {
     return (
-        <section className={classes.preview}>
-            <div className={classes.wrap}>
-                <div className={classes.topside}>
-                    <h1>Ми допомагаємо</h1>
-                    <hr/>
-                    <p>Знайти гуманiтарку</p>
-                    <p>Та отримати допомогу по Запорiжжю</p>
-                </div>
+      <Parallax blur={3} bgImage={require('../../../img/Preview.jpg')} strength={-150} className={classes.preview}>
+          <div className={classes.wrap}>
+              <div className={classes.topside}>
+                  <h1>Ми допомагаємо</h1>
+                  <hr/>
+                  <p>Знайти гуманiтарку</p>
+                  <p>Та отримати допомогу по Запорiжжю</p>
+              </div>
 
-                <a className={classes.underside}>
-                    <span>Перейти до мапи</span>
-                    <img src={arrowDown} alt=""/>
-                </a>
-            </div>
-
-        </section>
+              <Link
+                activeClass="active"
+                to="map"
+                spy={true}
+                smooth={true}
+                offset={-130}
+                duration={500}
+                className={classes.underside}>
+                  <span>Перейти до мапи</span>
+                  <img src={arrowDown} alt=""/>
+              </Link>
+          </div>
+      </Parallax>
     );
 };
 

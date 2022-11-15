@@ -1,4 +1,4 @@
-@import "src/style/variables"
+@import "../../../style/variables"
 .item
   display: flex
   flex-direction: column
@@ -7,6 +7,10 @@
   background: $white
   border: 2px solid $dark50
   border-radius: 3px
+  cursor: pointer
+  width: 100%
+  &_active
+    background: $light
   p
     color: $black
   p:nth-child(1)

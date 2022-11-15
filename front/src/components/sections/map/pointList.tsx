@@ -1,29 +1,22 @@
-import React, {FC, useEffect} from 'react';
-import classes from "../../../style/sections/map/pointList.module.sass";
-import PointItem from "./pointItem";
-import {IPointItem} from "../../../types";
+import React from 'react';
+import classes from "./pointList.module.sass";
+import PointElement from "./pointElement";
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
-import {useDispatch} from "react-redux";
-import {fetchPoints} from "../../../store/action-creators/point";
-import {useAppDispatch} from "../../../store";
-
-interface IPointList{
-  items: IPointItem[]
-}
+import {PointItem} from '../../../types/points';
 
 
-const PointList: FC<IPointList> = ({items}) => {
-  const {points, loading, errors} = useTypedSelector(state => state.points)
-  const dispatch = useAppDispatch()
+const PointList:React.FC = () => {
+  const {points} = useTypedSelector(state => state)
 
+  const render = (point:PointItem) => {
+    if (points.filter !== null && points.filter !== 'Все' && points.filter !== point.region) return
+    return <PointElement item={point} key={point.id}/>;
+  }
 
-  useEffect(() => {
-    //dispatch(fetchPoints())
-  }, [])
   return (
     <div className={classes.list}>
-      {items.map((item) =>
-        <PointItem item={item} key={item.id}/>
+      {points.points.map((point:PointItem) =>
+        render(point)
       )}
     </div>
   );
