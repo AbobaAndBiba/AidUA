@@ -1,0 +1,45 @@
+@import "../../../../style/variables"
+@import "../../../../style/null-styles";
+
+.authorForm
+    background-color: $dark
+    padding: 40px 35px
+.wrapper
+    display: flex
+    flex-direction: column
+    border: 1px solid $black
+    gap: 35px
+    padding: 10px 5px
+    border-radius: 4px
+    background-color: $light
+.title
+    font-size: 20px
+    font-weight: 500
+    line-height: 18px
+.formAuthor
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    gap: 20px
+
+.formAuthor> input
+    width: 350px
+    height: 25px
+    border-radius: 3px
+    background-color: $light50
+.formAuthor>button
+    height: 30px
+    width: 150px
+    border-radius: 3px
+    font-size: 12px
+    font-weight: 600
+    text-transform: uppercase
+    background-color: $dark50
+
+@media screen and (max-width:425px)
+    .title
+        font-size: 16px
+    .formAuthor
+        padding: 5px
+    .formAuthor> input
+        width: 220px

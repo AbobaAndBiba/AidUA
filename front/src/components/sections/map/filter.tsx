@@ -15,7 +15,7 @@ const Filter = () => {
 
   return (
     <select className={classes.select} defaultValue="Все" onChange={(event) => setPointsFilter(event.target.value)}>
-      <option value="Все">Все районы</option>
+      <option value="Все">Всі райони</option>
       {filters.map(item =>
         <option value={item} key={item} >{item}</option>
       )}

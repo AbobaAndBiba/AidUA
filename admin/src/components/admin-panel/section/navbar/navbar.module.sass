@@ -1,0 +1,61 @@
+@import "../../../../style/variables"
+@import "../../../../style/null-styles";
+
+.navigation
+    grid-area: navbar
+    max-width: 100vw
+    min-height: 70px
+    display: flex
+    // flex-direction: column
+    align-items: center
+    justify-content: center
+    background: $dark
+    position: relatives
+    top: 0
+    left: 0
+.menu
+    width: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    gap: 50px
+
+.menu__burger
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 5px
+    height: 100%
+    padding: 10px 0
+    z-index: 20
+    overflow: auto
+    display: none
+
+.active
+    font-size: 555px
+
+.menu__btn
+    height: 20px
+    width: 20px
+    position: absolute
+    top: 25px
+    right: 25px
+    border-top: 1px solid $black
+    border-bottom: 1px solid $black
+
+.news>a,.aid>a,.author>a,.map>a,.admin>a
+    color: $black
+    font-size: 1.15rem
+    line-height: 22px
+    font-weight: 600
+
+.news>a:hover,.aid>a:hover,.author>a:hover,.map>a:hover,.admin>a:hover
+    border-bottom: 1px solid $black
+
+@media screen and (max-width: 768px)
+    .navigation
+        min-height: 100vh
+    .menu
+       display: none
+    .menu__burger
+        display: flex

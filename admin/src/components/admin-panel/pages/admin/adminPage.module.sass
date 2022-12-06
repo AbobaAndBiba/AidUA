@@ -1,0 +1,15 @@
+@import "../../../../style/variables"
+@import "../../../../style/null-styles";
+
+.admin__pages
+    height: 100vh
+    width: 100vw
+    background-color: $dark
+    display: grid
+    grid-template-rows: 100px 1fr
+    grid-template-columns: 1fr
+    grid-template-areas: "navbar" "form"
+
+@media screen and (max-width: 768px)
+    .admin__pages
+        grid-template-rows: 200px 1fr
